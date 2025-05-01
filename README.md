@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Nike App
 
 This project is a React Native application named "Nike App". It provides a sleek and interactive UI for browsing Nike products. The application is built with React Native and utilizes various libraries for navigation, state management, and styling.
@@ -171,3 +172,6 @@ This project would not have been possible without the guidance and tutorials pro
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+=======
+# Ecommerce-App
+>>>>>>> 193048adea52a28d418116c9abffa3daba3fb7d5
