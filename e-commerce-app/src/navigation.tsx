@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -28,7 +28,9 @@ const Navigation = () => {
           options={({ navigation }) => ({
             headerRight: () => (
               <Pressable
-                style={{ flexDirection: "row" }}
+                style={{
+                  flexDirection: "row",
+                }}
                 onPress={() => {
                   navigation.navigate("Cart");
                 }}
@@ -38,7 +40,9 @@ const Navigation = () => {
                   size={24}
                   color={"#aaa"}
                 ></FontAwesome>
-                <Text style={{ marginLeft: 5, fontWeight: 500 }}>
+                <Text
+                  style={{ marginLeft: 5, fontWeight: 500, marginRight: 30 }}
+                >
                   {numberOfItems}
                 </Text>
               </Pressable>
