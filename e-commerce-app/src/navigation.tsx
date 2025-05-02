@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -27,7 +27,7 @@ const Navigation = () => {
           component={ProductsScreen}
           options={({ navigation }) => ({
             headerRight: () => (
-              <Pressable
+              <TouchableOpacity
                 style={{
                   flexDirection: "row",
                 }}
@@ -45,15 +45,22 @@ const Navigation = () => {
                 >
                   {numberOfItems}
                 </Text>
-              </Pressable>
+              </TouchableOpacity>
             ),
           })}
         ></Stack.Screen>
         <Stack.Screen
           name="Product Details"
           component={ProductDetailsScreen}
+          options={{
+            animation: "slide_from_bottom",
+          }}
         ></Stack.Screen>
-        <Stack.Screen name="Cart" component={ShoppingCart}></Stack.Screen>
+        <Stack.Screen
+          name="Cart"
+          component={ShoppingCart}
+          options={{ animation: "slide_from_right" }}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
