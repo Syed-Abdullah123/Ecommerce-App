@@ -37,7 +37,7 @@ const ShopingCartTotals = () => {
   );
 };
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ navigation }) => {
   const cartItems = useSelector((state) => state.cart.items);
   return (
     <View style={styles.container}>
@@ -46,7 +46,10 @@ const ShoppingCart = () => {
         renderItem={({ item }) => <CartListItem cartItem={item}></CartListItem>}
         ListFooterComponent={ShopingCartTotals}
       ></FlatList>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Checkout")}
+      >
         <Text style={styles.btnText}>Checkout</Text>
       </TouchableOpacity>
     </View>
