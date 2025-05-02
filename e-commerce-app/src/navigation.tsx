@@ -11,6 +11,9 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import { useSelector } from "react-redux";
 import { selectNumberOfItems } from "./store/cartSlice";
+import CheckoutScreen from "./screens/CheckoutScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+import PaymentSuccessScreen from "./screens/PaymentSuccessScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,9 +43,7 @@ const Navigation = () => {
                   size={24}
                   color={"#aaa"}
                 ></FontAwesome>
-                <Text
-                  style={{ marginLeft: 5, fontWeight: 500, marginRight: 30 }}
-                >
+                <Text style={{ marginLeft: 5, fontWeight: 500 }}>
                   {numberOfItems}
                 </Text>
               </TouchableOpacity>
@@ -59,6 +60,21 @@ const Navigation = () => {
         <Stack.Screen
           name="Cart"
           component={ShoppingCart}
+          options={{ animation: "slide_from_right" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Checkout"
+          component={CheckoutScreen}
+          options={{ animation: "slide_from_right" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Payment"
+          component={PaymentScreen}
+          options={{ animation: "slide_from_right" }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Success"
+          component={PaymentSuccessScreen}
           options={{ animation: "slide_from_right" }}
         ></Stack.Screen>
       </Stack.Navigator>
