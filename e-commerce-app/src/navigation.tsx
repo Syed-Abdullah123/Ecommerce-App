@@ -43,7 +43,9 @@ const Navigation = () => {
                   size={24}
                   color={"#aaa"}
                 ></FontAwesome>
-                <Text style={{ marginLeft: 5, fontWeight: 500 }}>
+                <Text
+                  style={{ marginLeft: 5, fontWeight: 500, marginRight: 30 }}
+                >
                   {numberOfItems}
                 </Text>
               </TouchableOpacity>
@@ -70,7 +72,11 @@ const Navigation = () => {
         <Stack.Screen
           name="Payment"
           component={PaymentScreen}
-          options={{ animation: "slide_from_right" }}
+          options={{
+            animation: "slide_from_right",
+            headerTitle: "",
+            headerShadowVisible: false,
+          }}
         ></Stack.Screen>
         <Stack.Screen
           name="Success"
