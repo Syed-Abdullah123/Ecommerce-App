@@ -47,26 +47,38 @@ const CheckoutScreen = ({ navigation }) => {
       <View style={styles.shippingContainer}>
         <Text style={styles.shippingText}>Shipping address</Text>
         <View style={styles.addressContainer}>
-          <TextInput placeholder="Enter phone number" style={styles.input} />
-          <TextInput placeholder="Enter your address" style={styles.input} />
+          <TextInput
+            placeholder="Enter phone number"
+            style={styles.input}
+            value="+92 310 1234567"
+          />
+          <TextInput
+            placeholder="Enter your address"
+            style={styles.input}
+            value="123 Main Street"
+          />
           <View style={{ flexDirection: "row", gap: 10 }}>
             <TextInput
               placeholder="Enter your country"
               style={[styles.input, { width: "48.5%" }]}
+              value="Pakistan"
             />
             <TextInput
               placeholder="Enter your city"
               style={[styles.input, { width: "48.5%" }]}
+              value="Lahore"
             />
           </View>
           <View style={{ flexDirection: "row", gap: 10 }}>
             <TextInput
               placeholder="Enter your state"
               style={[styles.input, { width: "48.5%" }]}
+              value="Punjab"
             />
             <TextInput
               placeholder="Enter postal code"
               style={[styles.input, { width: "48.5%" }]}
+              value="12345"
             />
           </View>
         </View>
@@ -75,7 +87,19 @@ const CheckoutScreen = ({ navigation }) => {
       {/* Button container */}
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Payment")}
+        onPress={() =>
+          navigation.navigate("Payment", {
+            deliveryOption: options[selectedIndex],
+            shippingInfo: {
+              phone: "+92 310 1234567",
+              address: "123 Main Street",
+              country: "Pakistan",
+              city: "Lahore",
+              state: "Punjab",
+              postalCode: "12345",
+            },
+          })
+        }
       >
         <Text style={styles.btnText}>Proceed</Text>
       </TouchableOpacity>
