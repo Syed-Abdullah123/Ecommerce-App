@@ -5,10 +5,53 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
+import { useStripe } from "@stripe/stripe-react-native";
 
 const PaymentScreen = ({ route, navigation }) => {
   const { deliveryOption, shippingInfo } = route.params;
+  const stripe = useStripe();
+
+  const handlePayPress = async () => {
+    const url =
+      "http://192.168.10.7:5001/workoutapp-cde1e/us-central1/api/create-payment-intent";
+    try {
+      const amountInCents = Math.round(
+        parseFloat(deliveryOption.price.replace("$", "")) * 100
+      );
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: amountInCents }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
+      const { clientSecret } = await response.json();
+
+      const { error, paymentIntent } = await stripe.confirmPayment(
+        clientSecret,
+        {
+          paymentMethodType: "Card",
+        }
+      );
+
+      if (error) {
+        console.error("Payment failed:", error.message);
+        Alert.alert("Payment failed", error.message);
+      } else if (paymentIntent) {
+        Alert.alert("Payment successful!", `Status: ${paymentIntent.status}`);
+        navigation.navigate("PaymentSuccessScreen");
+      }
+    } catch (err) {
+      console.error("Error during payment", err);
+      Alert.alert("Error", "Something went wrong during payment.");
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -42,14 +85,8 @@ const PaymentScreen = ({ route, navigation }) => {
         <Text style={styles.totalValue}>{deliveryOption.price}</Text>
       </View>
 
-      {/* Placeholder Button for Stripe */}
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          // Later this will trigger Stripe payment
-          alert("Stripe integration coming soon...");
-        }}
-      >
+      {/* Stripe Payment Button */}
+      <TouchableOpacity style={styles.button} onPress={handlePayPress}>
         <Text style={styles.btnText}>Pay Now</Text>
       </TouchableOpacity>
     </ScrollView>
